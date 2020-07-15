@@ -11,6 +11,12 @@ function showError(input, message) {
   small.innerText = message
 }
 
+//check email
+function isValidEmail(email) {
+  const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  return re.test(email)
+}
+
 //show success
 function showSuccess(input) {
   const formControl = input.parentElement
@@ -28,6 +34,8 @@ form.addEventListener("submit", function (e) {
   }
   if (email.value === "") {
     showError(email, "Email is required")
+  } else if (isValidEmail(email.value)) {
+    showError(email, "Email is not valid")
   } else {
     showSuccess(email)
   }
@@ -37,7 +45,7 @@ form.addEventListener("submit", function (e) {
     showSuccess(password)
   }
   if (password2.value === "") {
-    showError(password2, "password is required")
+    showError(password2, "Password 2 is required")
   } else {
     showSuccess(password2)
   }
